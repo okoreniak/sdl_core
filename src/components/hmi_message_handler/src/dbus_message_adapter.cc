@@ -42,10 +42,10 @@ namespace hmi_message_handler {
 
 CREATE_LOGGERPTR_GLOBAL(logger_, "HMIMessageHandler")
 
-const std::string DBusMessageAdapter::SDL_SERVICE_NAME = "com.ford.sdl.core";
-const std::string DBusMessageAdapter::SDL_OBJECT_PATH  = "/";
-const std::string DBusMessageAdapter::HMI_SERVICE_NAME = "com.ford.sdl.hmi";
-const std::string DBusMessageAdapter::HMI_OBJECT_PATH  = "/";
+const char* DBusMessageAdapter::SDL_SERVICE_NAME = "com.ford.sdl.core";
+const char* DBusMessageAdapter::SDL_OBJECT_PATH  = "/";
+const char* DBusMessageAdapter::HMI_SERVICE_NAME = "com.ford.sdl.hmi";
+const char* DBusMessageAdapter::HMI_OBJECT_PATH  = "/";
 
 std::vector<std::string> &split(const std::string &s, char delim,
                                 std::vector<std::string> &elems) {

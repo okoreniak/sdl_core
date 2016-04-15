@@ -414,8 +414,8 @@ namespace commands {
 
 uint32_t SystemRequest::index = 0;
 
-const std::string kSYNC = "SYNC";
-const std::string kIVSU = "IVSU";
+const char kSYNC[] = "SYNC";
+const char kIVSU[] = "IVSU";
 
 SystemRequest::SystemRequest(const MessageSharedPtr& message)
     : CommandRequestImpl(message) {

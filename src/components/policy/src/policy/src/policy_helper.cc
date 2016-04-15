@@ -778,7 +778,7 @@ bool UnwrapAppPolicies(policy_table::ApplicationPolicies& app_policies) {
                                                            find(kDefaultId);
   for (; app_policies.end() != it; ++it) {
     // Set default policies for app, if there is record like "123":"default"
-    if (kDefaultId.compare((*it).second.get_string()) == 0) {
+    if (std::string(kDefaultId).compare((*it).second.get_string()) == 0) {
       if (it != app_policies.end()) {
         (*it).second = (*it_default).second;
         it->second.set_to_string(kDefaultId);

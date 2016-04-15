@@ -429,7 +429,7 @@ private:
   PolicyHandler();
   bool SaveSnapshot(const BinaryMessage& pt_string, std::string& snap_path);
   static PolicyHandler* instance_;
-  static const std::string kLibrary;
+  static const char* kLibrary;
   mutable sync_primitives::RWLock policy_manager_lock_;
   utils::SharedPtr<PolicyManager> policy_manager_;
   void* dl_handle_;

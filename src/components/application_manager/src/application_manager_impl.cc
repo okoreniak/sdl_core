@@ -148,15 +148,21 @@ ApplicationManagerImpl::~ApplicationManagerImpl() {
   }
   protocol_handler_ = NULL;
   media_manager_ = NULL;
-  LOG4CXX_INFO(logger_, "Destroying Policy Handler");
+  LOG4CXX_INFO(logger_, "Destroying Policy Observers");
   RemovePolicyObserver(this);
+  LOG4CXX_INFO(logger_, "Destroying Policy Handler");
   policy::PolicyHandler::destroy();
+  LOG4CXX_INFO(logger_, "Clearing Timer Pool");
 
   sync_primitives::AutoLock lock(timer_pool_lock_);
   timer_pool_.clear();
+  LOG4CXX_INFO(logger_, "Clearing Apps to stop Queue");
 
   navi_app_to_stop_.clear();
+  LOG4CXX_INFO(logger_, "Clearing Apps to end stream Queue");
   navi_app_to_end_stream_.clear();
+  LOG4CXX_INFO(logger_, "Finished ApplicationManager dtor code");
+
 }
 
 bool ApplicationManagerImpl::Stop() {

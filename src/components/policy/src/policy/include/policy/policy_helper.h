@@ -40,9 +40,9 @@
 namespace policy {
 class PolicyManagerImpl;
 
-const std::string kAllowedKey = "allowed";
-const std::string kUserDisallowedKey = "userDisallowed";
-const std::string kUndefinedKey = "undefined";
+const char kAllowedKey[] = "allowed";
+const char kUserDisallowedKey[] = "userDisallowed";
+const char kUndefinedKey[] = "undefined";
 
 namespace policy_table = rpc::policy_table_interface_base;
 

@@ -164,7 +164,7 @@ class SQLPTRepresentation : public virtual PTRepresentation {
     virtual bool SetIsDefault(const std::string& app_id, bool is_default) const;
 
   private:
-    static const std::string kDatabaseName;
+    static const char* kDatabaseName;
     dbms::SQLDatabase* db_;
 
     bool SaveRpcs(int64_t group_id, const policy_table::Rpc& rpcs);

@@ -35,9 +35,9 @@
 namespace policy {
 namespace sql_pt {
 
-const std::string kSelectPriority =
+const char* kSelectPriority =
     "SELECT `priority_value` FROM `application` WHERE `id` = ? LIMIT 1";
-const std::string kCreateSchema =
+const char* kCreateSchema =
   "BEGIN; "
   "CREATE TABLE IF NOT EXISTS `device`( "
   "  `id` VARCHAR(100) PRIMARY KEY NOT NULL, "
@@ -319,7 +319,7 @@ const std::string kCreateSchema =
   "  ON `message`(`message_type_name`);"
   "COMMIT;";
 
-const std::string kInsertInitData =
+const char* kInsertInitData =
   "INSERT OR IGNORE INTO `usage_and_error_count` ( "
   "  `count_of_iap_buffer_full`, `count_sync_out_of_memory`, "
   "  `count_of_sync_reboots`) VALUES (0, 0, 0); "
@@ -344,7 +344,7 @@ const std::string kInsertInitData =
   "INSERT OR IGNORE INTO `version` (`number`) VALUES('0'); "
   "";
 
-const std::string kDropSchema =
+const char* kDropSchema =
   "BEGIN; "
   "DROP INDEX IF EXISTS `message.fk_messages_languages1_idx`; "
   "DROP INDEX IF EXISTS `message.fk_message_consumer_friendly_messages1_idx`; "
@@ -394,7 +394,7 @@ const std::string kDropSchema =
   "COMMIT; "
   "VACUUM;";
 
-const std::string kDeleteData =
+const char* kDeleteData =
   "BEGIN; "
   "DELETE FROM `message`; "
   "DELETE FROM `endpoint`; "
@@ -422,98 +422,98 @@ const std::string kDeleteData =
   "COMMIT; "
   "VACUUM;";
 
-const std::string kCheckDBIntegrity = "PRAGMA integrity_check";
+const char* kCheckDBIntegrity = "PRAGMA integrity_check";
 
-const std::string kCheckPgNumber = "PRAGMA page_count";
+const char* kCheckPgNumber = "PRAGMA page_count";
 
-const std::string kSelectRpc =
+const char* kSelectRpc =
   "SELECT DISTINCT `rpc`.`parameter` FROM `rpc` "
   "  JOIN `app_group` AS `g` ON (`g`.`functional_group_id` = `rpc`.`functional_group_id` "
   "    AND (`g`.`application_id` = ?)) "
   "WHERE `rpc`.`hmi_level_value` = ? AND `rpc`.`name` = ?";
 
-const std::string kSelectPreloaded =
+const char* kSelectPreloaded =
   "SELECT `preloaded_pt` FROM `module_config` "
   "WHERE `preloaded_pt` = 1 LIMIT 1";
 
-const std::string kUpdatePreloaded =
+const char* kUpdatePreloaded =
   "UPDATE `module_config` SET `preloaded_pt` = ?";
 
-const std::string kIsFirstRun =
+const char* kIsFirstRun =
   "SELECT `is_first_run` FROM `module_config` ";
 
-const std::string kSetNotFirstRun =
+const char* kSetNotFirstRun =
   "UPDATE `module_config` SET `is_first_run`= 0 ";
 
-const std::string kSelectEndpoint =
+const char* kSelectEndpoint =
   "SELECT `url`, `application_id` FROM `endpoint` WHERE `service` = ? ";
 
-const std::string kSelectLockScreenIcon =
+const char* kSelectLockScreenIcon =
   "SELECT `url` FROM `endpoint` WHERE `service` = ? AND `application_id` = ?";
 
-const std::string kInsertFunctionalGroup =
+const char* kInsertFunctionalGroup =
   "INSERT INTO `functional_group` (`id`, `name`, `user_consent_prompt`) "
   "  VALUES (?, ?, ?)";
 
-const std::string kInsertRpc =
+const char* kInsertRpc =
   "INSERT INTO `rpc` (`name`, `hmi_level_value`, `functional_group_id`) "
   "  VALUES (?, ?, ?)";
 
-const std::string kInsertRpcWithParameter =
+const char* kInsertRpcWithParameter =
   "INSERT INTO `rpc` (`name`, `hmi_level_value`, `parameter`, `functional_group_id`) "
   "  VALUES (?, ?, ?, ?)";
 
-const std::string kInsertApplication =
+const char* kInsertApplication =
   "INSERT OR IGNORE INTO `application` (`id`, `priority_value`, `is_revoked`, `memory_kb`,"
   " `heart_beat_timeout_ms`, `certificate`) VALUES (?,?,?,?,?,?)";
 
-const std::string kInsertAppGroup =
+const char* kInsertAppGroup =
   "INSERT INTO `app_group` (`application_id`, `functional_group_id`)"
   "  SELECT ?, `id` FROM `functional_group` WHERE `name` = ? LIMIT 1";
 
-const std::string kInsertNickname =
+const char* kInsertNickname =
   "INSERT OR IGNORE INTO `nickname` (`application_id`, `name`) VALUES (?, ?)";
 
-const std::string kInsertAppType =
+const char* kInsertAppType =
   "INSERT OR IGNORE INTO `app_type` (`application_id`, `name`) VALUES (?, ?)";
 
-const std::string kInsertRequestType =
+const char* kInsertRequestType =
   "INSERT OR IGNORE INTO `request_type` (`application_id`, `request_type`) VALUES (?, ?)";
 
-const std::string kUpdateVersion = "UPDATE `version` SET `number`= ?";
+const char* kUpdateVersion = "UPDATE `version` SET `number`= ?";
 
-const std::string kInsertMessageType =
+const char* kInsertMessageType =
   "INSERT OR IGNORE INTO `message_type` (`name`) VALUES (?)";
 
-const std::string kInsertLanguage =
+const char* kInsertLanguage =
   "INSERT OR IGNORE INTO `language` (`code`) VALUES (?)";
 
-const std::string kInsertMessageString =
+const char* kInsertMessageString =
   "INSERT INTO `message` (`tts`, `label`, `line1`, `line2`, `language_code`, "
   "  `message_type_name`, `textBody`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-const std::string kUpdateModuleConfig =
+const char* kUpdateModuleConfig =
   "UPDATE `module_config` SET `preloaded_pt` = ?, "
   "  `exchange_after_x_ignition_cycles` = ?,"
   "  `exchange_after_x_kilometers` = ?, `exchange_after_x_days` = ?, "
   "  `timeout_after_x_seconds` = ?, `vehicle_make` = ?, "
   "  `vehicle_model` = ?, `vehicle_year` = ?";
 
-const std::string kInsertEndpoint =
+const char* kInsertEndpoint =
   "INSERT INTO `endpoint` (`service`, `url`, `application_id`) "
   "  VALUES (?, ?, ?)";
 
-const std::string kInsertSecondsBetweenRetry =
+const char* kInsertSecondsBetweenRetry =
   "INSERT INTO `seconds_between_retry` (`index`, `value`) VALUES (?, ?)";
 
-const std::string kInsertNotificationsByPriority =
+const char* kInsertNotificationsByPriority =
   "INSERT OR REPLACE INTO `notifications_by_priority` (`priority_value`, `value`) "
   "  VALUES (?, ?)";
 
-const std::string kInsertDeviceData =
+const char* kInsertDeviceData =
   "INSERT OR IGNORE INTO `device` (`id`) VALUES (?)";
 
-const std::string kInsertAppLevel =
+const char* kInsertAppLevel =
   "INSERT INTO `app_level` (`application_id`, `minutes_in_hmi_full`,"
     "`minutes_in_hmi_limited` ,`minutes_in_hmi_background`,"
     "`minutes_in_hmi_none`,`count_of_user_selections`,"
@@ -524,141 +524,141 @@ const std::string kInsertAppLevel =
     "`count_of_run_attempts_while_revoked`,`app_registration_language_gui`,"
     "`app_registration_language_vui`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-const std::string kDeleteSecondsBetweenRetries =
+const char* kDeleteSecondsBetweenRetries =
   "DELETE FROM `seconds_between_retry`";
 
-const std::string kDeleteEndpoint = "DELETE FROM `endpoint`";
+const char* kDeleteEndpoint = "DELETE FROM `endpoint`";
 
-const std::string kDeleteAppLevel = "DELETE FROM `app_level`";
+const char* kDeleteAppLevel = "DELETE FROM `app_level`";
 
-const std::string kDeleteMessageString = "DELETE FROM `message`";
+const char* kDeleteMessageString = "DELETE FROM `message`";
 
-const std::string kDeleteFunctionalGroup = "DELETE FROM `functional_group`";
+const char* kDeleteFunctionalGroup = "DELETE FROM `functional_group`";
 
-const std::string kDeleteRpc = "DELETE FROM `rpc`";
+const char* kDeleteRpc = "DELETE FROM `rpc`";
 
-const std::string kDeleteAppGroup = "DELETE FROM `app_group`";
+const char* kDeleteAppGroup = "DELETE FROM `app_group`";
 
-const std::string kSelectModuleConfig =
+const char* kSelectModuleConfig =
   "SELECT `preloaded_pt`, `exchange_after_x_ignition_cycles`, "
   " `exchange_after_x_kilometers`, `exchange_after_x_days`, "
   " `timeout_after_x_seconds`, `vehicle_make`,"
   " `vehicle_model`, `vehicle_year` "
   " FROM `module_config`";
 
-const std::string kSelectEndpoints =
+const char* kSelectEndpoints =
   "SELECT `url`, `service`, `application_id` FROM `endpoint` ";
 
-const std::string kSelectNotificationsPerMin =
+const char* kSelectNotificationsPerMin =
   "SELECT `priority_value`, `value` FROM notifications_by_priority";
 
-const std::string kSelectNotificationsPerPriority =
+const char* kSelectNotificationsPerPriority =
     "SELECT `value` FROM notifications_by_priority WHERE `priority_value` = ? ";
 
-const std::string kSelectAppLevels = "SELECT `application_id` FROM `app_level`";
+const char* kSelectAppLevels = "SELECT `application_id` FROM `app_level`";
 
-const std::string kSelectDeviceData = "SELECT * FROM `device`";
+const char* kSelectDeviceData = "SELECT * FROM `device`";
 
-const std::string kSelectFunctionalGroups =
+const char* kSelectFunctionalGroups =
   "SELECT `id`,`name`, `user_consent_prompt` "
   "FROM `functional_group`";
 
-const std::string kSelectAllRpcs =
+const char* kSelectAllRpcs =
   "SELECT `name`, `hmi_level_value`, `parameter` "
   "FROM `rpc` WHERE `functional_group_id` = ? ";
 
-const std::string kSelectUserMsgsVersion =
+const char* kSelectUserMsgsVersion =
   "SELECT DISTINCT `number` FROM `version`";
 
-const std::string kSelectAppPolicies = "SELECT `id`, `priority_value`, `memory_kb`, "
+const char* kSelectAppPolicies = "SELECT `id`, `priority_value`, `memory_kb`, "
                                        " `heart_beat_timeout_ms`, `certificate` FROM `application`";
 
-const std::string kSelectAppGroups = "SELECT `f`.`name` FROM `app_group` AS `a`"
+const char* kSelectAppGroups = "SELECT `f`.`name` FROM `app_group` AS `a`"
                                      "  LEFT JOIN `functional_group` AS `f` "
                                      "    ON (`f`.`id` = `a`.`functional_group_id`)"
                                      "  WHERE `a`.`application_id` = ?";
 
-const std::string kSelectNicknames = "SELECT DISTINCT `name` FROM `nickname` "
+const char* kSelectNicknames = "SELECT DISTINCT `name` FROM `nickname` "
                                      "WHERE `application_id` = ?";
 
-const std::string kSelectAppTypes = "SELECT DISTINCT `name` FROM `app_type` "
+const char* kSelectAppTypes = "SELECT DISTINCT `name` FROM `app_type` "
                                     "WHERE `application_id` = ?";
 
-const std::string kSelectRequestTypes =
+const char* kSelectRequestTypes =
     "SELECT DISTINCT `request_type` FROM `request_type` WHERE `application_id` = ?";
 
-const std::string kSelectSecondsBetweenRetries =
+const char* kSelectSecondsBetweenRetries =
   "SELECT `value` FROM `seconds_between_retry` ORDER BY `index`";
 
-const std::string kSelectIgnitionCycles =
+const char* kSelectIgnitionCycles =
   "SELECT `c`.`exchange_after_x_ignition_cycles`, "
   "  `m`.`ignition_cycles_since_last_exchange` "
   "  FROM `module_config` AS `c`, `module_meta` AS `m` "
   "LIMIT 1";
 
-const std::string kSelectKilometers =
+const char* kSelectKilometers =
   "SELECT `c`.`exchange_after_x_kilometers`, "
   "  `m`.`pt_exchanged_at_odometer_x` "
   "  FROM `module_config` AS `c`, `module_meta` AS `m` "
   "LIMIT 1";
 
-const std::string kSelectDays = "SELECT `c`.`exchange_after_x_days`, "
+const char* kSelectDays = "SELECT `c`.`exchange_after_x_days`, "
                                 "  `m`.`pt_exchanged_x_days_after_epoch` "
                                 "  FROM `module_config` AS `c`, `module_meta` AS `m` "
                                 "LIMIT 1";
 
-const std::string kIncrementIgnitionCycles =
+const char* kIncrementIgnitionCycles =
   "UPDATE `module_meta` SET `ignition_cycles_since_last_exchange` = 1 + "
   "  `ignition_cycles_since_last_exchange`";
 
-const std::string kResetIgnitionCycles =
+const char* kResetIgnitionCycles =
   "UPDATE `module_meta` SET `ignition_cycles_since_last_exchange` = 0";
 
-const std::string kSelectTimeoutResponse =
+const char* kSelectTimeoutResponse =
   "SELECT `timeout_after_x_seconds` FROM `module_config` LIMIT 1";
 
-const std::string kUpdateFlagUpdateRequired =
+const char* kUpdateFlagUpdateRequired =
   "UPDATE `module_meta` SET `flag_update_required` = ?";
 
-const std::string kSelectFlagUpdateRequired =
+const char* kSelectFlagUpdateRequired =
   "SELECT `flag_update_required` FROM `module_meta` LIMIT 1";
 
-const std::string kUpdateCountersSuccessfulUpdate =
+const char* kUpdateCountersSuccessfulUpdate =
   "UPDATE `module_meta` SET `pt_exchanged_at_odometer_x` = ?,"
   "`pt_exchanged_x_days_after_epoch` = ?";
 
-const std::string kDeleteApplication = "DELETE FROM `application`";
+const char* kDeleteApplication = "DELETE FROM `application`";
 
-const std::string kDeleteRequestType = "DELETE FROM `request_type`";
+const char* kDeleteRequestType = "DELETE FROM `request_type`";
 
-const std::string kSelectApplicationRevoked =
+const char* kSelectApplicationRevoked =
   "SELECT `is_revoked` FROM `application` WHERE `id` = ?";
 
-const std::string kUpdateApplicationCustomData =
+const char* kUpdateApplicationCustomData =
   "UPDATE `application` SET `is_revoked` = ?, `is_default` = ?,"
   "`is_predata` = ? WHERE `id` = ?";
 
-const std::string kSelectApplicationRepresented =
+const char* kSelectApplicationRepresented =
   "SELECT COUNT(`id`) FROM `application` WHERE `id` = ?";
 
-const std::string kSelectApplicationIsDefault =
+const char* kSelectApplicationIsDefault =
   "SELECT `is_default` FROM `application` WHERE `id` = ?";
 
-const std::string kUpdateIsDefault =
+const char* kUpdateIsDefault =
   "UPDATE `application` SET `is_default` = ? WHERE `id` = ?";
 
-const std::string kDeleteDevice = "DELETE FROM `device` WHERE `id` = ?";
+const char* kDeleteDevice = "DELETE FROM `device` WHERE `id` = ?";
 
-const std::string kDeleteAppGroupByApplicationId =
+const char* kDeleteAppGroupByApplicationId =
   "DELETE FROM `app_group` WHERE `application_id` = ?";
 
-const std::string kInsertApplicationFull =
+const char* kInsertApplicationFull =
   "INSERT OR IGNORE INTO `application` (`id`, `keep_context`, `steal_focus`, "
   "  `default_hmi`, `priority_value`, `is_revoked`, `is_default`, `is_predata`, "
   " `memory_kb`, `heart_beat_timeout_ms`, `certificate`) "
   "  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-const std::string kSelectApplicationFull =
+const char* kSelectApplicationFull =
   "SELECT `keep_context`, `steal_focus`, `default_hmi`, `priority_value`, "
   "  `is_revoked`, `is_default`, `is_predata`, `memory_kb`,"
   "  `heart_beat_timeout_ms`, `certificate` FROM `application` WHERE `id` = ?";

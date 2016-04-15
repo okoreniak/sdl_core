@@ -60,10 +60,10 @@ class DBusMessageAdapter
   void SubscribeTo();
 
  private:
-  static const std::string SDL_SERVICE_NAME;
-  static const std::string SDL_OBJECT_PATH;
-  static const std::string HMI_SERVICE_NAME;
-  static const std::string HMI_OBJECT_PATH;
+  static const char* SDL_SERVICE_NAME;
+  static const char* SDL_OBJECT_PATH;
+  static const char* HMI_SERVICE_NAME;
+  static const char* HMI_OBJECT_PATH;
 
   /**
    * \brief sends request to HMI

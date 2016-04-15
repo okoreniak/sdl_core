@@ -938,7 +938,7 @@ static const char invalid_char_value = 0;
 /**
  * @brief Value that is used as invalid value for string type
  **/
-static const std::string invalid_string_value = "";
+static const char invalid_string_value[] ="" ;
 
 /**
  * @brief Value that is used as invalid value for double type

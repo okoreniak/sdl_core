@@ -107,9 +107,9 @@ bool IsValidEnum(RequestType val);
 const char* EnumToJsonString(RequestType val);
 bool EnumFromJsonString(const std::string& literal, RequestType* result);
 
-extern const std::string kDefaultApp;
-extern const std::string kPreDataConsentApp;
-extern const std::string kDeviceApp;
+extern const char* kDefaultApp;
+extern const char* kPreDataConsentApp;
+extern const char* kDeviceApp;
 
 }  // namespace policy_table_interface_base
 }  // namespace rpc

@@ -45,17 +45,17 @@ namespace policy {
 enum PolicyErrorEnum {
 };
 
-const std::string kDefaultDeviceMacAddress = "00:00:00:00:00:00";
-const std::string kDefaultDeviceName = "MyDevice";
-const std::string kDefaultDeviceConnectionType = "UNKNOWN";
+const char kDefaultDeviceMacAddress[] = "00:00:00:00:00:00";
+const char kDefaultDeviceName[] = "MyDevice";
+const char kDefaultDeviceConnectionType[] = "UNKNOWN";
 
 /**
  * @brief Constants for special ids in application policies section of
  * policy table
  */
-const std::string kPreDataConsentId = "pre_DataConsent";
-const std::string kDefaultId = "default";
-const std::string kDeviceId = "device";
+const char kPreDataConsentId[] = "pre_DataConsent";
+const char kDefaultId[] = "default";
+const char kDeviceId[] = "device";
 
 /*
  * @brief Status of policy table update

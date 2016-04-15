@@ -253,7 +253,7 @@ private:
 };
 
 PolicyHandler* PolicyHandler::instance_ = NULL;
-const std::string PolicyHandler::kLibrary = "libPolicy.so";
+const char* PolicyHandler::kLibrary = "libPolicy.so";
 
 PolicyHandler::PolicyHandler()
 
@@ -277,7 +277,7 @@ bool PolicyHandler::LoadPolicyLibrary() {
     policy_manager_ = NULL;
     return NULL;
   }
-  dl_handle_ = dlopen(kLibrary.c_str(), RTLD_LAZY);
+  dl_handle_ = dlopen(kLibrary, RTLD_LAZY);
 
   char* error_string = dlerror();
   if (error_string == NULL) {

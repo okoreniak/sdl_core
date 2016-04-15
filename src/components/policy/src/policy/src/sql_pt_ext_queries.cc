@@ -35,71 +35,71 @@
 namespace policy {
 namespace sql_pt_ext {
 
-const std::string kSelectKeepContext =
+const char* kSelectKeepContext =
   "SELECT `keep_context` FROM `application` WHERE `id` = ? LIMIT 1";
 
-const std::string kSelectStealFocus =
+const char* kSelectStealFocus =
   "SELECT `steal_focus` FROM `application` WHERE `id` = ? LIMIT 1";
 
-const std::string kSelectDefaultHmi =
+const char* kSelectDefaultHmi =
   "SELECT `default_hmi` FROM `application` WHERE `id` = ? LIMIT 1";
 
-const std::string kResetDeviceConsents = "DELETE FROM `device_consent_group`";
+const char* kResetDeviceConsents = "DELETE FROM `device_consent_group`";
 
-const std::string kResetAppConsents = "DELETE FROM `consent_group`";
+const char* kResetAppConsents = "DELETE FROM `consent_group`";
 
-const std::string kCountDeviceConsentGroup = "SELECT COUNT (`device_id`) "
+const char* kCountDeviceConsentGroup = "SELECT COUNT (`device_id`) "
     "FROM `device_consent_group` WHERE `device_id` = ?";
 
-const std::string kCountDevice = "SELECT COUNT (`id`) "
+const char* kCountDevice = "SELECT COUNT (`id`) "
                                  "FROM `device` WHERE `id` = ?";
 
-const std::string kSelectDeviceConsentedGroup =
+const char* kSelectDeviceConsentedGroup =
   "SELECT * FROM `device_consent_group` WHERE `device_id` = ?";
 
-const std::string kUpdateDeviceConsentedGroup =
+const char* kUpdateDeviceConsentedGroup =
   "UPDATE `device_consent_group` SET `is_consented` = ?, `input` = ? WHERE "
   "(`device_id` = ? AND `functional_group_id` = ?)";
 
-const std::string kUpdateDevice =
+const char* kUpdateDevice =
   "UPDATE `device` SET `hardware` = ?, `firmware_rev` = ?, `os` = ?, "
   "`os_version` = ?, `carrier` = ?, `max_number_rfcom_ports` = ?, "
   " `connection_type` = ? WHERE `id` = ? ";
 
-const std::string kInsertDeviceConsentedGroup =
+const char* kInsertDeviceConsentedGroup =
   "INSERT OR REPLACE INTO `device_consent_group` "
   "(`device_id`, `functional_group_id`, `is_consented`, `input`, `time_stamp`) "
   "VALUES (?,?,?,?,?)";
 
-const std::string kInsertDevice =
+const char* kInsertDevice =
   "INSERT OR IGNORE INTO `device` "
   "(`id`, `hardware`, `firmware_rev`, `os`, `os_version`, `carrier`,"
     "`max_number_rfcom_ports`, `connection_type`) "
   "VALUES (?,?,?,?,?,?,?,?)";
 
-const std::string kSelectDeviceData = "SELECT * FROM `device`";
+const char* kSelectDeviceData = "SELECT * FROM `device`";
 
-const std::string kSelectConsentGroup =
+const char* kSelectConsentGroup =
   "SELECT * FROM `consent_group` WHERE `device_id` = ? ";
 
-const std::string kInsertPreconsentedGroups =
+const char* kInsertPreconsentedGroups =
   "INSERT INTO `preconsented_group` (`application_id`, `functional_group_id`)"
   "  SELECT ?, `id` FROM `functional_group` WHERE `name` = ? LIMIT 1";
 
-const std::string kSelectPreconsentedGroups =
+const char* kSelectPreconsentedGroups =
   "SELECT `f`.`name` FROM `preconsented_group` AS `p`"
   "  LEFT JOIN `functional_group` AS `f` "
   "    ON (`f`.`id` = `p`.`functional_group_id`)"
   "  WHERE `p`.`application_id` = ?";
 
-const std::string kDeletePreconsentedGroups = "DELETE FROM `preconsented_group`";
+const char* kDeletePreconsentedGroups = "DELETE FROM `preconsented_group`";
 
-const std::string kSelectUsageAndErrorCount =
+const char* kSelectUsageAndErrorCount =
   "SELECT `count_of_iap_buffer_full`, `count_sync_out_of_memory`, "
   "  `count_of_sync_reboots` "
   "FROM `usage_and_error_count` LIMIT 1";
 
-const std::string kSelectAppLevels =
+const char* kSelectAppLevels =
   "SELECT `application_id`, `minutes_in_hmi_full`, `minutes_in_hmi_limited`, "
   "  `minutes_in_hmi_background`, `minutes_in_hmi_none`, "
   "  `count_of_user_selections`, "
@@ -114,28 +114,28 @@ const std::string kSelectAppLevels =
   "  `app_registration_language_vui` "
   "FROM `app_level`";
 
-const std::string kUpdateGlobalCounters = "UPDATE `usage_and_error_count` SET "
+const char* kUpdateGlobalCounters = "UPDATE `usage_and_error_count` SET "
     "`count_of_iap_buffer_full` = ?, "
     "`count_sync_out_of_memory` = ?, "
     "`count_of_sync_reboots` = ? ";
 
-const std::string kInsertDeviceData =
+const char* kInsertDeviceData =
   "INSERT OR IGNORE INTO `device` "
   "(`id`, `hardware`, `firmware_rev`, `os`, `os_version`, `carrier`, "
   "`max_number_rfcom_ports`,`connection_type`) VALUES (?,?,?,?,?,?,?,?) ";
 
-const std::string kInsertConsentGroups =
+const char* kInsertConsentGroups =
   "INSERT OR REPLACE INTO `consent_group` "
   "(`device_id`, `application_id`, `functional_group_id`, `is_consented`, `input`, `time_stamp`) "
   "VALUES (?,?,?,?,?,?)";
 
-const std::string kDeleteAppGroupConsent = "DELETE FROM `consent_group` WHERE "
+const char* kDeleteAppGroupConsent = "DELETE FROM `consent_group` WHERE "
   "`application_id` = ? AND `functional_group_id` = ? ";
 
- const std::string kSelectGroupId =
+ const char* kSelectGroupId =
      "SELECT `id` FROM `functional_group` WHERE `name` = ? ";
 
-const std::string kCountUnconsentedGroups =
+const char* kCountUnconsentedGroups =
   "SELECT COUNT(`a`.`functional_group_id`) FROM `app_group` AS `a` "
   " WHERE `a`.`application_id` = ?  AND NOT EXISTS "
   " (SELECT NULL FROM `preconsented_group` AS `p` WHERE "
@@ -153,94 +153,94 @@ const std::string kCountUnconsentedGroups =
   " WHERE (`a`.`functional_group_id` = `f`.`id`"
   " AND`f`.`user_consent_prompt` IS NULL))";
 
-const std::string kSelectModuleMeta = "SELECT* FROM `module_meta`";
+const char* kSelectModuleMeta = "SELECT* FROM `module_meta`";
 
-const std::string kUpdateMetaParams = "UPDATE `module_meta` SET "
+const char* kUpdateMetaParams = "UPDATE `module_meta` SET "
                                       "`ccpu_version` = ?, `wers_country_code` = ?, `language` = ? ";
 
-const std::string kUpdateModuleMetaVinParam =
+const char* kUpdateModuleMetaVinParam =
     "UPDATE `module_meta` SET `vin` = ? ";
 
-const std::string kSaveModuleMeta =
+const char* kSaveModuleMeta =
     "UPDATE `module_meta` SET `ccpu_version` = ?, `language` = ?,"
     "`wers_country_code` = ?, `pt_exchanged_at_odometer_x` = ?,"
     "`pt_exchanged_x_days_after_epoch` = ?,"
     "`ignition_cycles_since_last_exchange` = ?, `vin` = ?";
 
-const std::string kSelectMetaParams = "SELECT `ccpu_version`, "
+const char* kSelectMetaParams = "SELECT `ccpu_version`, "
                    "`wers_country_code`, `language` from `module_meta`";
 
-const std::string kUpdateMetaLanguage = "UPDATE `module_meta` SET `language` = ? ";
+const char* kUpdateMetaLanguage = "UPDATE `module_meta` SET `language` = ? ";
 
-const std::string kCountAppLevel =
+const char* kCountAppLevel =
   "SELECT COUNT(`application_id`) FROM `app_level`"
   " WHERE `application_id` = ? ";
 
-const std::string kUpdateGroupPermissions =
+const char* kUpdateGroupPermissions =
   "UPDATE `consent_group` "
   "SET `is_consented` = ?, `input` = ? "
   "WHERE(`application_id` = ? AND `functional_group_id` = ? AND `device_id` = ?) ";
 
-const std::string kInsertApplication =
+const char* kInsertApplication =
   "INSERT OR IGNORE INTO `application`(`id`, `keep_context`, `steal_focus`, "
   " `default_hmi`, `priority_value`, `is_revoked`, `memory_kb`, "
   " `heart_beat_timeout_ms`, `certificate`) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
-const std::string kCollectFriendlyMsg = "SELECT * FROM `message`";
+const char* kCollectFriendlyMsg = "SELECT * FROM `message`";
 
-const std::string kSelectFriendlyMsg =
+const char* kSelectFriendlyMsg =
   "SELECT `tts`, `label`, `line1`, `line2`, `textBody` FROM `message` "
   "WHERE `message_type_name` = ? AND `language_code` = ? LIMIT 1";
 
-const std::string kSelectAppGroupsId = "SELECT `functional_group_id` "
+const char* kSelectAppGroupsId = "SELECT `functional_group_id` "
                                        "FROM `app_group` WHERE `application_id` = ? ";
 
-const std::string kSelectConsentedGroupsId =
+const char* kSelectConsentedGroupsId =
   "SELECT `functional_group_id`, `is_consented` "
   "FROM `consent_group` WHERE(`application_id` = ? AND `device_id` = ?) ";
 
-const std::string kCountAppConsents = "SELECT COUNT(*) from `consent_group`"
+const char* kCountAppConsents = "SELECT COUNT(*) from `consent_group`"
                                       "WHERE(`device_id` = ? AND `application_id` = ? AND "
                                       "`functional_group_id` = ?) ";
 
-const std::string kSelectPreconsentedGroupsId = "SELECT `functional_group_id` "
+const char* kSelectPreconsentedGroupsId = "SELECT `functional_group_id` "
     "FROM `preconsented_group` WHERE `application_id` = ? ";
 
-const std::string kSelectAppPolicies =
+const char* kSelectAppPolicies =
   "SELECT `id`, `priority_value`, `default_hmi`, `keep_context`, `steal_focus`, "
   " `memory_kb`, `heart_beat_timeout_ms`, `certificate` FROM `application`";
 
-const std::string kSelectFunctionalGroupNames = "SELECT `id`, `user_consent_prompt`, `name`"
+const char* kSelectFunctionalGroupNames = "SELECT `id`, `user_consent_prompt`, `name`"
     " FROM `functional_group`";
 
-const std::string kDeleteDeviceConsent = "DELETE FROM `device_consent_group` "
+const char* kDeleteDeviceConsent = "DELETE FROM `device_consent_group` "
     "WHERE `device_id` = ? ";
 
-const std::string kDeleteAppConsent = "DELETE FROM `consent_group` "
+const char* kDeleteAppConsent = "DELETE FROM `consent_group` "
                                       "WHERE `device_id` = ? ";
 
-const std::string kSelectApplicationIsPreData =
+const char* kSelectApplicationIsPreData =
   "SELECT `is_predata` FROM `application` WHERE `id` = ? ";
 
-const std::string kUpdateIsPredata =
+const char* kUpdateIsPredata =
   "UPDATE `application` SET `is_predata` = ? WHERE `id` = ? ";
 
-const std::string kHasAppPreloadedGroups =
+const char* kHasAppPreloadedGroups =
   "SELECT COUNT(`a1`.`functional_group_id`) FROM `app_group` "
   " AS `a1` JOIN `app_group` AS `a2` "
   " ON `a1`.`functional_group_id` = `a2`.`functional_group_id` "
   " WHERE `a1`.`application_id` = ? AND `a2`.`application_id` = ? ";
 
-const std::string kUpdateUnpairedDevice =
+const char* kUpdateUnpairedDevice =
   "UPDATE `device` SET `unpaired` = ? WHERE `id` = ? ";
 
-const std::string kSelectUnpairedDevices =
+const char* kSelectUnpairedDevices =
   "SELECT `id` FROM `device` WHERE `unpaired` = 1";
 
-const std::string kHasMsgLanguageCode = "SELECT COUNT (`id`) FROM message "
+const char* kHasMsgLanguageCode = "SELECT COUNT (`id`) FROM message "
         "WHERE `message_type_name` = ? AND `language_code` = ? ";
 
-const std::string kDeletePreconsentedGroupsByApplicationId =
+const char* kDeletePreconsentedGroupsByApplicationId =
   "DELETE FROM `preconsented_group` WHERE `application_id` = ?";
 
 }  // namespace sql_pt_ext

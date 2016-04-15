@@ -465,7 +465,7 @@ SmartObject& SmartObject::operator=(const std::string& NewValue) {
 
 bool SmartObject::operator==(const std::string& Value) const {
   const std::string comp = convert_string();
-  if (comp == invalid_string_value) {
+  if (comp.c_str() == invalid_string_value) {
     return false;
   }
   return comp == Value;
@@ -516,7 +516,7 @@ SmartObject& SmartObject::operator=(const char* NewValue) {
 
 bool SmartObject::operator==(const char* Value) const {
   const std::string comp = convert_string();
-  if (comp == invalid_string_value) {
+  if (comp.c_str() == invalid_string_value) {
     return false;
   }
   return (0 == comp.compare(Value));
@@ -875,6 +875,8 @@ void SmartObject::setSchema(const CSmartSchema& schema) {
 CSmartSchema SmartObject::getSchema() {
   return m_schema;
 }
+
+//const char * CSmartObject::invalid_string_value = "";
 
 }  // namespace NsSmartObjects
 }  // namespace NsSmartDeviceLink

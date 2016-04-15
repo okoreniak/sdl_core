@@ -137,12 +137,12 @@ class SQLDatabase {
    *  The temporary in-memory database
    *  @see SQLite manual
    */
-  static const std::string kInMemory;
+  static const char* kInMemory;
 
   /**
    * The extension of filename of database
    */
-  static const std::string kExtension;
+  static const char* kExtension;
 
   /**
    * Execs query for internal using in this class

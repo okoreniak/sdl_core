@@ -429,9 +429,9 @@ bool EnumFromJsonString(const std::string& literal, RequestType* result) {
   }
 }
 
-const std::string kDefaultApp = "default";
-const std::string kPreDataConsentApp = "pre_DataConsent";
-const std::string kDeviceApp = "device";
+const char* kDefaultApp = "default";
+const char* kPreDataConsentApp = "pre_DataConsent";
+const char* kDeviceApp = "device";
 
 }  // namespace policy_table_interface_base
 }  // namespace rpc

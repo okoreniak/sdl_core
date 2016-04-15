@@ -36,8 +36,8 @@
 namespace policy {
 namespace dbms {
 
-const std::string SQLDatabase::kInMemory = ":memory:";
-const std::string SQLDatabase::kExtension = ".sqlite";
+const char *SQLDatabase::kInMemory = ":memory:";
+const char *SQLDatabase::kExtension = ".sqlite";
 
 SQLDatabase::SQLDatabase()
     : conn_(NULL),

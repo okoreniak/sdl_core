@@ -60,7 +60,7 @@ template<typename T, typename K> void InsertUnique(K value, T* array) {
 }
 }  //  namespace
 
-const std::string SQLPTRepresentation::kDatabaseName = "policy";
+const char* SQLPTRepresentation::kDatabaseName = "policy";
 
 SQLPTRepresentation::SQLPTRepresentation()
   : db_(new dbms::SQLDatabase(kDatabaseName)) {
@@ -884,7 +884,7 @@ bool SQLPTRepresentation::SaveSpecificAppPolicy(
   }
 
   if (app.second.is_string()) {
-    if (kDefaultId.compare(app.second.get_string()) == 0) {
+    if (std::string(kDefaultId).compare(app.second.get_string()) == 0) {
       if (!SetDefaultPolicy(app.first)) {
         return false;
       }
@@ -918,7 +918,7 @@ bool policy::SQLPTRepresentation::SaveDevicePolicy(
     return false;
   }
 
-  app_query.Bind(0, kDeviceId);
+  app_query.Bind(0, std::string(kDeviceId));
   app_query.Bind(1, std::string(policy_table::EnumToJsonString(device.priority)));
   app_query.Bind(2, false);
   app_query.Bind(3, 0);

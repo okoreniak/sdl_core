@@ -58,8 +58,8 @@ namespace policy_table_interface_base {
     PT_UPDATE,
     PT_SNAPSHOT
   };
-  const std::string ommited_validation_info = "should be ommited in ";
-  const std::string required_validation_info = "is required in ";
+  const char ommited_validation_info[] = "should be ommited in ";
+  const char required_validation_info[] = "is required in ";
 
   std::string PolicyTableTypeToString(const PolicyTableType pt_type);
 

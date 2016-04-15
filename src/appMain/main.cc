@@ -202,4 +202,5 @@ int32_t main(int32_t argc, char** argv) {
   DEINIT_LOGGER();
 
   return EXIT_SUCCESS;
+  //_exit(EXIT_SUCCESS);
 }
